@@ -1,0 +1,38 @@
+global:
+  smtp_smarthost: 'smtp.163.com:465'
+  smtp_from: '18611305335@163.com'
+  smtp_auth_username: '18611305335@163.com'
+  smtp_auth_password: ''
+  smtp_require_tls: false
+
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h 
+  receiver: all-mail-group
+
+  routes:
+  - match:
+      severity: critical
+    receiver: critical-mail-group
+    routes:
+    - match:
+        severity: warning
+      receiver: warning-mail-group
+
+receivers:
+- name: 'all-mail-group'
+  email_configs:
+  - to: 'xxx@fiberhome.com'
+    send_resolved: true
+    tls_config:
+      insecure_skip_verify: true
+
+- name: 'critical-mail-group'
+  email_configs:
+  - to: 'yyy@fiberhome.com'
+
+- name: 'warning-mail-group'
+  email_configs:
+  - to: 'zzz@fiberhome.com'
