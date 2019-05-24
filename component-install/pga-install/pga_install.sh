@@ -15,6 +15,7 @@ egrep "^$user" /etc/passwd >& /dev/null || useradd -M prometheus
 if [ "$node"x = "node"x ];then
   cp --force system/node_exporter.service /usr/lib/systemd/system/
   sleep 1
+  cp -rn prometheus  $dst_dir
   systemctl enable node_exporter
   systemctl start node_exporter
   echo "*****[sucess]install node_exporter sucess"
@@ -22,7 +23,7 @@ if [ "$node"x = "node"x ];then
 fi
 
 [ -d "/usr/local/prometheus" ] && mv $dst_dir /tmp/$date_now 
-cp -rn prometheus  $dst_dir
+cp -r --force prometheus  $dst_dir
 
 [ -f "conf/alertmanager.yml" ] && cp --force conf/alertmanager.yml $dst_dir/alertmanager
 [ -f "conf/prometheus.yml" ] && cp --force conf/prometheus.yml $dst_dir/prometheus
@@ -48,6 +49,7 @@ yum localinstall grafana/rpmdir/* -y > /dev/null  && echo "install grafana..."
 [ -d "/var/lib/grafana/plugins/vonage-status-panel" ] && rm -rf /var/lib/grafana/plugins/vonage-status-panel
 
 unzip -o grafana/Vonage-Grafana_Status_panel-v1.0.9-4-g2a9b8e1.zip > /dev/null
+[ -d /var/lib/grafana/plugins ] || mkdir /var/lib/grafana/plugins -p 
 mv Vonage-Grafana_Status_panel-2a9b8e1 /var/lib/grafana/plugins/vonage-status-panel 
 
 [ -d "/var/lib/grafana/plugins/grafana-piechart-panel" ] && rm -rf /var/lib/grafana/plugins/grafana-piechart-panel 
