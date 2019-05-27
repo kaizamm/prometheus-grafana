@@ -5,14 +5,22 @@
 
 set -e
 
-read -p "server or node:" node
+#read -p "server or node:" node
+
+while getopts r: option
+do
+case "${option}"
+in
+r) role=${OPTARG};;
+esac
+done
 
 date_now=`date +%Y%m%d%H%M`
 dst_dir="/usr/local/prometheus"
 user="prometheus"
 
 egrep "^$user" /etc/passwd >& /dev/null || useradd -M prometheus
-if [ "$node"x = "node"x ];then
+if [ "$role"x = "node"x ];then
   cp --force system/node_exporter.service /usr/lib/systemd/system/
   sleep 1
   cp -rn prometheus  $dst_dir

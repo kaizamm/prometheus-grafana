@@ -20,3 +20,11 @@ read -p "cluster ip[]: " clusterIp
 sh os-config/network_config.sh -p $publicIp -c $clusterIp 
 
 
+# pga-install
+read -p "role [server or node]: " role
+sh component-install/pga-install/pga_install.sh -r $role
+
+# health-check
+sh health-check/pga-check.sh -r $role
+
+
