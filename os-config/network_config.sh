@@ -19,12 +19,28 @@ echo "$interface"
 read -p "[public interface]:"  publicInterface
 read -p "[cluster interface]:"  clusterInterface
 
+if [ "$publicInterface"x = "$clusterInterface"x ];then
+  #pass
+  echo "[*****warning*****public interace = cluster interface, just config public interace only"
+  publicUuid=`egrep "^UUID" $networkDir/$publicInterface | awk -F= '{print $2}'`
+  publicDevice=`egrep "^DEVICE" $networkDir/$publicInterface|awk -F= '{print $2}'`
+  [[ ! $publicUuid ]] || [[ ! $publicDevice ]] && echo "*****[error]*****Uid or device name get none"
+  read -p "[public subnet(eg:24)]:"  publicSubnet
+  read -p "[public gateway]:"  publicGateway
+  publicSubnetType="PREFIX"
+  echo "*****[info]*****publicIp:$publicIp $publicSubnetType:$publicSubnet publicGateway:$publicGateway"
+  mv $networkDir/$publicInterface $networkDir/bak_$publicInterface  && \
+  cp template/ifcfg-network $networkDir/$publicInterface || echo "*****[error]*****mv $publicInterface error"
+  sed -i -e  "s/^IPADDR=.*/IPADDR=$publicIp/g" -e "s/^$publicSubnetType=.*/$publicSubnetType=$publicSubnet/g" -e "s/^GATEWAY=.*/GATEWAY=$publicGateway/g" -e "s/^UUID=.*/UUID=$publicUuid/g" -e "s/^NAME=.*/NAME=$publicDevice/g" -e "s/^DEVICE=.*/DEVICE=$publicDevice/g"  $networkDir/$publicInterface
+  echo "*****[sucess]*****modify network,please confirm $networkDir/$publicInterface"
+  exit 0 
+fi
 #public uuid && device
 publicUuid=`egrep "^UUID" $networkDir/$publicInterface | awk -F= '{print $2}'`
 publicDevice=`egrep "^DEVICE" $networkDir/$publicInterface|awk -F= '{print $2}'`
 #cluster uuid && device
 clusterUuid=`egrep "^UUID" $networkDir/$clusterInterface | awk -F= '{print $2}'`
-clusterDevice=`echo $clusterInterface|awk -F- '{print $2}'`
+clusterDevice=`egrep "^DEVICE" $networkDir/$clusterInterface | awk -F= '{print $2}'`
 [[ ! $publicUuid ]] || [[ ! $publicDevice ]] || [[ ! $clusterUuid ]] || [[ ! $clusterDevice ]] && echo "*****[error]*****Uid or device name get none"
 
 publicSubnetType="PREFIX"                                      
@@ -47,4 +63,4 @@ mv $networkDir/$clusterInterface $networkDir/bak_$clusterInterface  && \
 cp template/ifcfg-network $networkDir/$clusterInterface || echo "*****[error]*****mv $clusterInterface error"
 sed -i -e  "s/^IPADDR=.*/IPADDR=$clusterIp/g" -e "s/^$clusterSubnetType=.*/$clusterSubnetType=$clusterSubnet/g" -e "s/GATEWAY=.*/GATEWAY=$clusterGateway/g" -e "s/^UUID=.*/UUID=$clusterUuid/g" -e "s/^NAME=.*/NAME=$clusterDevice/g" -e "s/^DEVICE=.*/DEVICE=$clusterDevice/g"  $networkDir/$clusterInterface
 
-echo "*****[sucess]*****modify network,please confirm $networkDir/$clusterInterface and $networkDir/$publicInterface,and systemctl restart network"
+echo "*****[sucess]*****modify network,please confirm $networkDir/$publicInterface and $networkDir/$clusterInterface ,and systemctl restart network"
