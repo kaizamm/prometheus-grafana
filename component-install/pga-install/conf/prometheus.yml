@@ -8,7 +8,8 @@ alerting:
       - targets: ['10.127.7.80:9093']
 
 rule_files:
-   - "ceph_default_alerts.yml"
+  - "ceph_default_alerts.yml"
+  - "hoststat-alerts.yml"
 
 scrape_configs:
   - job_name: 'prometheus'
