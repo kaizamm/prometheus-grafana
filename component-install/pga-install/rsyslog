@@ -1,0 +1,6 @@
+:syslogtag, contains, "prometheus" /var/log/prometheus
+:syslogtag, contains, "alertmanager" /var/log/alertmanager
+:syslogtag, contains, "node_exporter" /var/log/node_exporter
+:syslogtag, contains, "prometheus" ~
+:syslogtag, contains, "alertmanager" ~
+:syslogtag, contains, "node_exporter" ~
