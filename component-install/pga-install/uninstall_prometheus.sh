@@ -8,6 +8,7 @@ rm -rf /usr/lib/systemd/system/alertmanager.service
 rm -rf /usr/lib/systemd/system/node_exporter.service
 rm -rf /usr/lib/systemd/system/prometheus.service
 yum remove grafana -y
+yum remove keepalived -y
 userdel prometheus 
 systemctl daemon-reload
 sleep 1

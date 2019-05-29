@@ -53,7 +53,7 @@ systemctl start prometheus
 echo "*****[sucess]service start sucess [alertmanager node_exporter prometheus]"
 
 ###install grafana
-yum localinstall grafana/rpmdir/* -y > /dev/null  && echo "install grafana..." 
+yum localinstall $dirNow/grafana/rpmdir/* -y > /dev/null  && echo "install grafana..." 
 
 [ -d "/var/lib/grafana/plugins/vonage-status-panel" ] && rm -rf /var/lib/grafana/plugins/vonage-status-panel
 
@@ -71,3 +71,6 @@ systemctl start grafana-server
 echo "*****[sucess]service start sucess [grafana-server]"
 echo "*****[info]next to view grafana website to dump json on grafana/dashboards"
 
+# keepalived
+
+[ -f "/etc/keepalived/keepalived.conf" ] && cp --force $dirNow/grafana/keepalived.conf /etc/keepalived/keepalived.conf

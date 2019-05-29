@@ -22,7 +22,9 @@ sh os-config/network_config.sh -p $publicIp -c $clusterIp
 
 
 # pga-install
+
 read -p "role [server or node]: " role
+[[ ! $role ]] && role="server"
 sh component-install/pga-install/pga_install.sh -r $role
 
 # health-check
