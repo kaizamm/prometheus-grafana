@@ -12,9 +12,10 @@ pga_host=`egrep ^pga_host cluster-deploy/fitstor.conf|awk -F= '{print $2}'`
 iscsigw_host=`egrep ^iscsigw_host cluster-deploy/fitstor.conf|awk -F= '{print $2}'`
 
 # os-config
-sh os-config/fw_config.sh 
-read -p "hostname: " hostName
-sh os-config/hostname_config.sh -n $hostName 
+#sh os-config/fw_config.sh 
+read -p "new hostname:[default<enter>]" hostName
+echo "hostname:$hostName"
+[[ ! $hostName ]] || sh os-config/hostname_config.sh -n $hostName 
 read -p "public ip[$mon_hosts]: " publicIp
 read -p "cluster ip[]: " clusterIp
 sh os-config/network_config.sh -p $publicIp -c $clusterIp 
