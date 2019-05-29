@@ -20,6 +20,16 @@ fi
 netstat -antup|grep -w 9090|grep -i listen || echo "*****error*****prometheus: prometheus 9090/port,please systemctl start prometheus"
 netstat -antup|grep -w 3000|grep -i listen || echo "*****error*****grafana-server: grafana-server 3000/port,please systemctl start grafana-server"
 
+function cephHealth()
+{
+  netstat -antup|grep -w 9283|grep -i listen || \
+  echo "*****warning*****ceph-mgr:  9283/port,please ceph mgr services" 
+  ceph mgr module enable prometheus& 
+  ceph mgr module enable dashboard&
+}
+
+cephHealth
+
 echo "*****[sucess]*****pga health"
 #ceph mgr services|grep prometheus
 #if [ $? -ne 0 ]; then
