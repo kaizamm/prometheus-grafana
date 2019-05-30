@@ -27,7 +27,7 @@ function modify_config()
   monIpSub2=`echo ${monIpSub%.*}`
   myIp=`ip addr | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' |awk -F/ '{print $1}'|grep $monIpSub2`
   dirNow=$(cd "$(dirname "$0")";pwd)
-  [[ ! $myIp ]] &&  "*****error*****myIp get fail!"
+  [[ ! $myIp ]] &&  "*****error*****Ip get fail!" && exit 1
   python $dirNow/pga_config.py $monIp $myIp
 }
 
