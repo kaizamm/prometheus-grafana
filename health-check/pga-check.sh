@@ -4,7 +4,7 @@ while getopts r: option
 do
 case "${option}"
 in
-r) hostName=${OPTARG};;
+r) role=${OPTARG};;
 esac
 done
 
@@ -13,7 +13,7 @@ if [ $? -ne 0 ];then
   echo "*****error*****prometheus node_exporter 9100 port,please systemctl start node_exporter"
 fi
 
-if [ "$role"x = "node" ];then
+if [ "$role"x = "node"x ];then
   exit 0
 fi
 

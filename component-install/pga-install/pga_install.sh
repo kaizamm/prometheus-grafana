@@ -24,7 +24,8 @@ egrep "^$user" /etc/passwd >& /dev/null || useradd -M prometheus
 if [ "$role"x = "node"x ];then
   cp --force $dirNow/system/node_exporter.service /usr/lib/systemd/system/
   sleep 1
-  cp -rn $dirNow/prometheus  $dst_dir
+  [ -d "/usr/local/prometheus" ] && mv $dst_dir /tmp/$date_now
+  cp -r --force $dirNow/prometheus  $dst_dir
   systemctl enable node_exporter
   systemctl start node_exporter
   echo "*****[sucess]install node_exporter sucess"
