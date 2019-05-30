@@ -32,10 +32,10 @@ if [[ "$net"x = "yes"x  ]];then
   }
 fi 
 # pga-install
-sh component-install/pga-install/pga_config.sh -m mon_hosts
 read -p "role [server or node]: " role
 [[ ! $role ]] && role="server"
 sh component-install/pga-install/pga_install.sh -r $role
+sh component-install/pga-install/pga_config.sh -m $mon_hosts
 
 # health-check
 sh health-check/pga-check.sh -r $role

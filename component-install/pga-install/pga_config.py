@@ -14,9 +14,12 @@ dstPath=os.path.join(nowDir,'conf/prometheus.yml')
 
 with open(dstPath,'r+') as f:
   data = yaml.load(f)
-  data["alerting"]["alertmanagers"][0]["static_configs"][0]["targets"]=[myIp+":9093"]
-  data["scrape_configs"][0]["static_configs"][0]["targets"]=[myIp+":9090"]
-  data["scrape_configs"][1]["static_configs"][0]["targets"]=ceph_targ
-  data["scrape_configs"][2]["static_configs"][0]["targets"]=node_targ
+
+data["alerting"]["alertmanagers"][0]["static_configs"][0]["targets"]=[myIp+":9093"]
+data["scrape_configs"][0]["static_configs"][0]["targets"]=[myIp+":9090"]
+data["scrape_configs"][1]["static_configs"][0]["targets"]=ceph_targ
+data["scrape_configs"][2]["static_configs"][0]["targets"]=node_targ
+
+with open(dstPath,'w+') as f:
   yaml.dump(data,f)
 

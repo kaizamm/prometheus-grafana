@@ -25,8 +25,8 @@ function cephHealth()
 {
   netstat -antup|grep -w 9283|grep -i listen || \
   echo "*****warning*****ceph-mgr:  9283/port,please ceph mgr services" 
-  ceph mgr module enable prometheus& 
-  ceph mgr module enable dashboard&
+  ceph mgr module enable prometheus& &>/dev/null
+  ceph mgr module enable dashboard& &>/dev/null
 }
 
 cephHealth
