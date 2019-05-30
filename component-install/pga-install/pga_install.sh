@@ -22,8 +22,6 @@ user="prometheus"
 dirNow=$(cd "$(dirname "$0")";pwd)
 egrep "^$user" /etc/passwd >& /dev/null || useradd -M prometheus
 if [ "$role"x = "node"x ];then
-  cp --force $dirNow/system/node_exporter.service /usr/lib/systemd/system/
-  sleep 1
   [ -d "/usr/local/prometheus" ] && mv $dst_dir /tmp/$date_now
   cp -r --force $dirNow/prometheus  $dst_dir
   systemctl enable node_exporter
