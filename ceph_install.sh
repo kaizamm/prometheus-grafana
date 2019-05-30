@@ -20,12 +20,25 @@ echo "The server is $server"
 
 # 1.os-config
 sh os-config/fw_config.sh 
-#read -p "new hostname:[default<enter>]" hostNamesh os-config/hostname_config.sh -n $hostName 
-#[[ ! $hostName ]] || sh os-config/hostname_config.sh -n $hostName 
 
-#read -p "public ip[$mon_hosts]: " publicIp
-#read -p "cluster ip[]: " clusterIp
-#sh os-config/network_config.sh -p $publicIp -c $clusterIp 
+read -p "config hostname?[yes] or [no]<default> " hostNameFlag
+
+if [[ "$hostNameFlag"x = "yes"x ]];then
+{
+  read -p "hostname:" hostName
+  echo "hostname:$hostName"
+  [[ ! $hostName ]] || sh os-config/hostname_config.sh -n $hostName
+}
+fi
+
+read -p "config network?:[yes] or [no]<default>" net
+if [[ "$net"x = "yes"x  ]];then
+  {
+    read -p "public ip[$mon_hosts]: " publicIp
+    read -p "cluster ip[]: " clusterIp
+    sh os-config/network_config.sh -p $publicIp -c $clusterIp
+  }
+fi
 
 # 1.1配置ceph源
 cd /root/ceph-install/os-config/
