@@ -14,6 +14,7 @@ if [ $? -ne 0 ];then
 fi
 
 if [ "$role"x = "node"x ];then
+  echo "*****[sucess]*****pga health"
   exit 0
 fi
 
