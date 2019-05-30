@@ -21,3 +21,51 @@ scrape_configs:
   - job_name: 'node_exporter'
     static_configs:
       - targets: ['10.127.7.81:9100','10.127.7.80:9100','10.127.7.82:9100']
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['192.168.0.11:9093']
+global: {evaluation_interval: 15s, scrape_interval: 15s}
+rule_files: [ceph_default_alerts.yml, hoststat-alerts.yml]
+scrape_configs:
+- job_name: prometheus
+  static_configs:
+  - targets: ['10.127.7.80:9090']
+- job_name: ceph
+  static_configs:
+  - targets: ['10.127.7.80:9283', '10.127.7.81:9283', '10.127.7.82:9283']
+- job_name: node_exporter
+  static_configs:
+  - targets: ['10.127.7.81:9100', '10.127.7.80:9100', '10.127.7.82:9100']
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['192.168.0.11:9093']
+global: {evaluation_interval: 15s, scrape_interval: 15s}
+rule_files: [ceph_default_alerts.yml, hoststat-alerts.yml]
+scrape_configs:
+- job_name: prometheus
+  static_configs:
+  - targets: [192.168.0.119090]
+- job_name: ceph
+  static_configs:
+  - targets: ['192.168.0.11:9283', '192.168.0.12:9283', '192.168.0.13:9283']
+- job_name: node_exporter
+  static_configs:
+  - targets: ['192.168.0.11:9100', '192.168.0.12:9100', '192.168.0.13:9100']
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['192.168.0.11:9093']
+global: {evaluation_interval: 15s, scrape_interval: 15s}
+rule_files: [ceph_default_alerts.yml, hoststat-alerts.yml]
+scrape_configs:
+- job_name: prometheus
+  static_configs:
+  - targets: ['192.168.0.11:9090']
+- job_name: ceph
+  static_configs:
+  - targets: ['192.168.0.11:9283', '192.168.0.12:9283', '192.168.0.13:9283']
+- job_name: node_exporter
+  static_configs:
+  - targets: ['192.168.0.11:9100', '192.168.0.12:9100', '192.168.0.13:9100']
