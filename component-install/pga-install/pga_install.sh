@@ -31,7 +31,7 @@ if [ "$role"x = "node"x ];then
 fi
 
 ###install grafana
-yum localinstall $dirNow/grafana/rpmdir/* --skip-broken -y > /dev/null  && echo "install grafana..." 
+yum --disablerepo=\* localinstall $dirNow/grafana/rpmdir/* --skip-broken -y > /dev/null  && echo "install grafana..." 
 
 [ -d "/var/lib/grafana/plugins/vonage-status-panel" ] && rm -rf /var/lib/grafana/plugins/vonage-status-panel
 
