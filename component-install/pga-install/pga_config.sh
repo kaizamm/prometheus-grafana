@@ -31,9 +31,17 @@ function modify_config()
   python $dirNow/pga_config.py $monIp $myIp
 }
 
+function splitLog()
+{
+   dirNow=$(cd "$(dirname "$0")";pwd)
+   sh $dirNow/rsyslog.sh
+}
+
 if [[ ! "$monIp" ]];then
   config
+  splitLog
 else
   modify_config
   config
+  splitLog
 fi
