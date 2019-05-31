@@ -20,7 +20,8 @@ fi
 read -p "config network?:[yes] or [no]<default>" net
 if [[ "$net"x = "yes"x  ]];then
   {
-    read -p "public ip[$mon_hosts]: " publicIp
+    echo "MonIp as follows:%$mon_hosts"
+    read -p "public ip[]: " publicIp
     read -p "cluster ip[]: " clusterIp
     sh os-config/network_config.sh -p $publicIp -c $clusterIp 
   }
