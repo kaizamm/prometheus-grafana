@@ -14,6 +14,7 @@ if [[ "$hostNameFlag"x = "yes"x ]];then
   read -p "hostname:" hostName
   echo "hostname:$hostName"
   [[ ! $hostName ]] || sh os-config/hostname_config.sh -n $hostName 
+  read -p "please CTRL + C to quit...then restart network"
 }
 fi
 
