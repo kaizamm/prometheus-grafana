@@ -1,14 +1,12 @@
 #!/bin/bash
 
-set -e
-
 chown -R root.root ./*
 chmod -R 755 ./*
 #find . -name '.sh' -exec chmod +x {} \;
 
 mon_hosts=`egrep ^mon_hosts os-config/fitstor.conf|awk -F= '{print $2}'`
 # os-config
-#sh os-config/fw_config.sh 
+sh os-config/fw_config.sh 
 read -p "config hostname?[yes] or [no]<default> " hostNameFlag
 
 if [[ "$hostNameFlag"x = "yes"x ]];then

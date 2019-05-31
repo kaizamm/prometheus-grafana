@@ -81,4 +81,7 @@ fi
 
 clusterConfig
 
+
 echo "*****[sucess]*****modify network,please confirm $networkDir/$publicInterface and $networkDir/$clusterInterface ,and systemctl restart network"
+
+read -p "please CTRL + C to quit...then restart network"
