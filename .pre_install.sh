@@ -14,7 +14,6 @@ if [[ "$hostNameFlag"x = "yes"x ]];then
   read -p "hostname:" hostName
   echo "hostname:$hostName"
   [[ ! $hostName ]] || sh os-config/hostname_config.sh -n $hostName 
-  read -p "please CTRL + C to quit...then restart network"
 }
 fi
 
@@ -25,6 +24,7 @@ if [[ "$net"x = "yes"x  ]];then
     read -p "public ip[]: " publicIp
     read -p "cluster ip[]: " clusterIp
     sh os-config/network_config.sh -p $publicIp -c $clusterIp 
+    read -p "please CTRL + C to quit...then restart network"
   }
 fi 
 # pga-install
