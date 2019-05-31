@@ -15,7 +15,7 @@ r) role=${OPTARG};;
 esac
 done
 
-date_now=`date +%Y%m%d%H%M`
+date_now=`date +%Y%m%d%H%M%S`
 dst_dir="/usr/local/prometheus"
 user="prometheus"
 

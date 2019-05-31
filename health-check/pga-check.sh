@@ -29,7 +29,7 @@ function cephHealth()
   ceph mgr module enable dashboard& &>/dev/null
 }
 
-cephHealth
+#cephHealth
 
 echo "*****[sucess]*****pga health"
 #ceph mgr services|grep prometheus
