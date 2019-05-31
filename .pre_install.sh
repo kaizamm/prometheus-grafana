@@ -29,8 +29,9 @@ fi
 # pga-install
   monIpSub=`echo $mon_hosts|awk -F, '{print $1}'`
   monIpSub2=`echo ${monIpSub%.*}`
-  server1=monIpSub
+  server1=$monIpSub
   server2=`echo $mon_hosts|awk -F, '{print $2}'`
+  echo "server1:$server1;server2:$server2"
   myIp=`ip addr | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' |awk -F/ '{print $1}'|grep $monIpSub2`
   [[ ! $myIp ]] &&  "*****error*****get host ip fail!" && exit 1
   
@@ -44,7 +45,7 @@ else
   role="node"
   sh component-install/pga-install/pga_install.sh -r "node"
 fi
-
+echo "role:$role"
 # health-check
 sh health-check/pga-check.sh -r $role
 
