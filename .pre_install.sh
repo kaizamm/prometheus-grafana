@@ -2,6 +2,8 @@
 
 chown -R root.root ./*
 chmod -R 755 ./*
+
+find . -name '.*conf' -exec sed 's/\r//g' {} \;
 #find . -name '.sh' -exec chmod +x {} \;
 
 mon_hosts=`egrep ^mon_hosts os-config/fitstor.conf|awk -F= '{print $2}'`
