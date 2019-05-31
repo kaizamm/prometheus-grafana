@@ -57,8 +57,6 @@ FILE_NAME=/root/ceph-install/os-config/fitstor.conf
 ADMIN=$(cat $FILE_NAME | grep admin_host | awk -F '=' '{print $2}')
 echo "$ADMIN"
 
-
-
 if $server
 then
 	cd /root/ceph-install/
@@ -69,7 +67,7 @@ fi
 #2.1 ceph 软件安装
 echo "##################start to install ceph#####################"
 cd /root/ceph-install/component-install/ceph_pkgs-13.05/
-#sh ceph_deploy_install.sh
+sh ceph_deploy_install.sh
 
 # pga-install
 # 此处判断是否是server
@@ -78,6 +76,8 @@ if $server
 then	
 	echo "pga_install server"
 	sh pga_install.sh -r server
+	sh pga_config.sh -m $mon_hosts
+
 else
 	echo "pga_install node"
 	sh pga_install.sh -r node
