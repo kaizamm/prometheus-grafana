@@ -1,4 +1,13 @@
 groups:
+  - name: cluster clock
+    rules:
+      - alert: clock sync error
+        expr: max(node_time_seconds)-min(node_time_seconds) > 60
+        labels:
+          severity: critical
+          type: node_exporter
+        annotations:
+          description: cluster clock error
   - name: cluster health
     rules:
       - alert: health error
