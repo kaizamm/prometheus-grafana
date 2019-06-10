@@ -1,45 +1,23 @@
 {
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": "5.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "vonage-status-panel",
-      "name": "Status Panel",
-      "version": "1.0.8"
-    }
-  ],
   "annotations": {
-    "list": []
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
   },
   "description": "存储集群监控",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1525415495309,
+  "id": 6,
+  "iteration": 1560151281737,
   "links": [],
   "panels": [
     {
@@ -118,7 +96,6 @@
       "thresholds": "1,2",
       "timeFrom": "1m",
       "title": "Health Status",
-      "transparent": false,
       "type": "singlestat",
       "valueFontSize": "50%",
       "valueMaps": [
@@ -319,7 +296,7 @@
         }
       ],
       "thresholds": "70,80",
-      "title": "Capacity used",
+      "title": "Capacity used %",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -453,6 +430,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "PG States",
       "tooltip": {
@@ -485,7 +463,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -559,6 +541,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "OSD Latencies",
       "tooltip": {
@@ -591,7 +574,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "clusterName": "",
@@ -727,12 +714,184 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "$datasource",
-      "fill": 1,
+      "description": "",
+      "fill": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 6
+      },
+      "id": 70,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_stat_bytes{instance=~\"$instance\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "osd total",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Capacity Tatal",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bits",
+          "label": "Osd Used",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "description": "",
+      "fill": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 69,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_stat_bytes_used{instance=~\"$instance\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "osd used",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Capacity  Used",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bits",
+          "label": "Osd Used",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 15
       },
       "id": 45,
       "legend": {
@@ -779,6 +938,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Cluster I/O",
       "tooltip": {
@@ -811,7 +971,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -824,7 +988,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 6
+        "y": 15
       },
       "id": 62,
       "legend": {
@@ -858,6 +1022,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "In-/Egress",
       "tooltip": {
@@ -890,7 +1055,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cards": {
@@ -911,15 +1080,17 @@
         "h": 9,
         "w": 6,
         "x": 0,
-        "y": 15
+        "y": 24
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 55,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "span": 12,
       "targets": [
         {
@@ -953,6 +1124,7 @@
         "show": true,
         "splitFactor": null
       },
+      "yBucketBound": "auto",
       "yBucketNumber": null,
       "yBucketSize": null
     },
@@ -974,15 +1146,17 @@
         "h": 9,
         "w": 6,
         "x": 6,
-        "y": 15
+        "y": 24
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 59,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "ceph_osd_numpg{instance=~\"$instance\"}",
@@ -1012,6 +1186,7 @@
         "show": true,
         "splitFactor": null
       },
+      "yBucketBound": "auto",
       "yBucketNumber": null,
       "yBucketSize": null
     },
@@ -1026,7 +1201,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 15
+        "y": 24
       },
       "id": 64,
       "legend": {
@@ -1061,6 +1236,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Recovery Rate",
       "tooltip": {
@@ -1093,11 +1269,15 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
     "ceph",
@@ -1106,13 +1286,20 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
         "hide": 0,
+        "includeAll": false,
         "label": null,
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -1188,13 +1375,18 @@
         ],
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
+        "skipUrlSync": false,
         "type": "interval"
       },
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "$datasource",
+        "definition": "",
         "hide": 0,
         "hideLabel": false,
         "includeAll": true,
@@ -1206,6 +1398,7 @@
         "query": "label_values(ceph_health_status, instance)",
         "refresh": 1,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -1246,5 +1439,6 @@
   },
   "timezone": "browser",
   "title": "存储集群监控",
-  "version": 13
-    }
+  "uid": "nJ7VumnWz",
+  "version": 7
+}
