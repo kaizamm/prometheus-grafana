@@ -53,7 +53,7 @@ function clusterConfig()
   clusterUuid=`egrep "^UUID" $networkDir/$clusterInterface | awk -F= '{print $2}'`
   clusterDevice=`egrep "^DEVICE" $networkDir/$clusterInterface | awk -F= '{print $2}'`
   clusterSubnetType="PREFIX"
-  read -p "[cluster subnet(24)]:"  clusterSubnet
+  read -p "[cluster subnet(default:24)]:"  clusterSubnet
   if [[ ! $clusterSubnet ]];then
     clusterSubnet="24"
   fi
