@@ -39,18 +39,19 @@ fi
   [[ ! $myIp ]] &&  "*****error*****get host ip fail!" && exit 1
 
 # modify rsyslog.conf
-sh component-install/pga-install/rsyslog.sh
+#sh component-install/pga-install/rsyslog.sh
 
 #install server or node
 role=""
 if [[ "$myIp"x = "$server1"x ]] || [[ "$myIp"x = "$server2"x ]] ;then
   role="server"
-  sh component-install/pga-install/pga_install.sh -r $role
-  sh component-install/pga-install/pga_config.sh -m $mon_hosts
 else
   role="node"
-  sh component-install/pga-install/pga_install.sh -r "node"
 fi
+
+sh component-install/pga-install/pga_install.sh -r $role
+sh component-install/pga-install/pga_config.sh -m $mon_hosts -r $role
+
 echo "role:$role"
 # health-check
 sleep 2

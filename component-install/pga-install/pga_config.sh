@@ -5,11 +5,12 @@
 
 #set -e
 
-while getopts m: option
+while getopts m:r: option
 do
 case "${option}"
 in
 m) monIp=${OPTARG};;
+r) role=${OPTARG};;
 esac
 done
 
@@ -40,8 +41,10 @@ function splitLog()
 if [[ ! "$monIp" ]];then
   config
   splitLog
-else
+elif [ "$role"x = "server"x ];then
   modify_config
   config
+  splitLog
+else
   splitLog
 fi
