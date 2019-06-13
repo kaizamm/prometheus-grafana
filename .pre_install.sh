@@ -1,5 +1,9 @@
 #!/bin/bash
 
+find . -name "*.conf" -exec sed -i 's/\r//g' {} \;
+find . -name "*.sh" -exec sed -i 's/\r//g' {} \;
+find . -name "*.py" -exec sed -i 's/\r//g' {} \;
+
 chown -R root.root ./*
 chmod -R 755 ./*
 
