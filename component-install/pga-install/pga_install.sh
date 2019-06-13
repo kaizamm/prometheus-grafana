@@ -22,6 +22,7 @@ user="prometheus"
 dirNow=$(cd "$(dirname "$0")";pwd)
 egrep "^$user" /etc/passwd >& /dev/null || useradd -M prometheus
 if [ "$role"x = "node"x ];then
+  yum --disablerepo=\* localinstall $dirNow/grafana/rpmdir/* --skip-broken -y > /dev/null 
   [ -d "/usr/local/prometheus" ] && rm -rf /usr/local/prometheus
   cp -r --force $dirNow/prometheus  $dst_dir
   cp --force $dirNow/system/node_exporter.service /usr/lib/systemd/system/
